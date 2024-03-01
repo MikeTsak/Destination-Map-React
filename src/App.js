@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Map from './Map';
 import Statistics from './Statistics';
 import CountryList from './CountryList';
+import LocationsList from './LocationsList';
 
 const App = () => {
   const [pins, setPins] = useState([]);
@@ -43,6 +44,9 @@ const App = () => {
   </div>
   <div className="country-list">
     <CountryList pins={pins} />
+  </div>
+  <div className="country-list">
+    <LocationsList pins={pins} />
   </div>
 
   <footer className="app-footer">
