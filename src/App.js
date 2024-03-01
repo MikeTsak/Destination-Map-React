@@ -6,16 +6,16 @@ import CountryList from './CountryList';
 const App = () => {
   const [pins, setPins] = useState([]);
   const [routes, setRoutes] = useState([]);
-  const [showRoutes, setShowRoutes] = useState(true);
+  const [showRoutes, setShowRoutes] = useState(false);
 
   useEffect(() => {
     // Fetch the pins data
-    fetch('https://raw.githubusercontent.com/MikeTsak/Destination-Map/main/pins.json')
+    fetch('https://raw.githubusercontent.com/MikeTsak/Destination-Map-React/main/pins.json')
       .then(response => response.json())
       .then(data => setPins(data));
 
     // Fetch the travel routes data
-    fetch('https://raw.githubusercontent.com/MikeTsak/Destination-Map/main/routes.json') // Adjust the path as necessary
+    fetch('https://raw.githubusercontent.com/MikeTsak/Destination-Map-React/main/routes.json') // Adjust the path as necessary
       .then(response => response.json())
       .then(data => setRoutes(data));
   }, []);
@@ -33,9 +33,9 @@ const App = () => {
     <Map pins={pins} routes={routes} showRoutes={showRoutes}/>
   </div>
 
-  <button className="toggle-routes-button" onClick={toggleRoutes}>
+  {/* <button className="toggle-routes-button" onClick={toggleRoutes}>
     {showRoutes ? 'Hide Routes' : 'Show Routes'}
-  </button>
+  </button> */}
 
   {/* Ensure Statistics and CountryList are styled or positioned as needed */}
   <div className="statistics">
@@ -44,6 +44,10 @@ const App = () => {
   <div className="country-list">
     <CountryList pins={pins} />
   </div>
+
+  <footer className="app-footer">
+        Made by <a href="https://miketsak.gr" target="_blank" rel="noopener noreferrer" className="footer-link">miketsak.gr</a>
+  </footer>
 </div>
 
   );

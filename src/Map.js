@@ -56,22 +56,39 @@ const Map = ({ pins, countriesGeoJSON, routes, showRoutes }) => {
   });
 
   return (
-    <MapContainer center={[37.9838, 23.7275]} zoom={3.4} scrollWheelZoom={false} style={{ height: '100vh', width: '100%' }}>
+    <MapContainer center={[37.9838, 23.7275]} zoom={3.45} scrollWheelZoom={false} style={{ height: '100vh', width: '100%' }}>
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
       />
-      {pins.map((pin, index) => (
-        <Marker key={index} position={[pin.lat, pin.lng]} icon={new L.Icon({
-          iconUrl: 'https://i.miketsak.gr/i/map-marker-2-512.png', // Ensure this path is correct
-          iconSize: [25, 25],
-          iconAnchor: [12, 12],
-          popupAnchor: [1, -34],
-        })}>
-          <Popup>
-            {pin.label} <br /> {pin.country}
-          </Popup>
-        </Marker>
-      ))}
+
+{pins.map((pin, index) => (
+  <Marker key={index} position={[pin.lat, pin.lng]} icon={new L.Icon({
+    iconUrl: 'https://i.miketsak.gr/i/map-marker-2-512.png',
+    iconSize: [25, 25],
+    iconAnchor: [12, 12],
+    popupAnchor: [1, -34],
+  })}>
+    <Popup>
+      <div className="popup-content">
+        <div className="popup-image-container">
+          <img 
+            src={`https://map.miketsak.gr/img/${pin.image}.jpg`} 
+            alt={pin.label} 
+          />
+        </div>
+        <span className="popup-label">{pin.label}</span>
+        <span className="popup-country">{pin.country}</span>
+        <img 
+          src={`https://flagcdn.com/w20/${pin.flag}.png`} 
+          alt={`${pin.country} Flag`} 
+          style={{width: '20px', height: '15px', marginTop: '5px', border: '1px solid #333'}}
+        />
+      </div>
+    </Popup>
+  </Marker>
+))}
+
+
       <GeoJSON data={countriesGeoJSON} style={countryStyle} />
       {showRoutes && routePolylines}
     </MapContainer>
